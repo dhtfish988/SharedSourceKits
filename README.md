@@ -57,6 +57,8 @@ The main header is [MGExploitationKit.h](MGExploitation/Sources/Public/MGExploit
 
 [MGXKernelPrimitives.h](MGExploitation/Sources/Public/MGXKernelPrimitives.h) exposes the lower-level memory and process interfaces. It includes other headers by relative path, so preserve the `Sources` directory layout when using it. The code maintains process-wide state and has no concurrency contract for running multiple chains at once.
 
+The lower-level headers use `kernel_support_*` for primitive initialization, `system_info_*` for system metadata operations, and `runtime_info(...)` for runtime configuration. Consumers must rebuild against the current headers and library together. XPC runtime keys are `runtimeInfo.usesPACBypass` and `runtimeInfo.rootPath`; producers and consumers must use the same schema. `RuntimeRootPath` and `NSRuntimeRootPath` resolve paths relative to the configured root. The optional `exec_cmd_trusted` macro requires a host-provided `kernel_support_trust_binary` declaration and implementation; this library does not provide that service.
+
 ## Compatibility and current limits
 
 The chain selects from iOS 14–16-era exploit profiles. The shipped build target starts at iOS 15.0, and the selector has no entries above iOS 16.6.1. The `smith` implementation is present but deliberately skipped by the selector. These checks describe the current code, not a list of devices confirmed to work.
@@ -73,6 +75,6 @@ The current source was compiled into ARM64 Debug and Release archives with Xcode
 
 ## Included code
 
-MGExploitation combines integration code with existing components, including KFD and Dopamine-derived helpers. The `KernelSupport` directory was previously named `libjailbreak`; its existing function names are retained. Original copyright notices remain in the source. `ThirdParty` contains XPF sources, Choma and libgrabkernel2 headers and static archives, and libarchive headers. The bundled archives do not include the full source trees used to build them.
+MGExploitation combines integration code with existing components, including KFD and Dopamine-derived helpers. Original copyright notices remain in the source. `ThirdParty` contains XPF sources, Choma and libgrabkernel2 headers and static archives, and libarchive headers. The bundled archives do not include the full source trees used to build them.
 
 The notes under [MGExploitation/docs](MGExploitation/docs/) include earlier design plans and debugging records. Some describe proposed interfaces; the current public headers and implementation are the reference for what is available now.
