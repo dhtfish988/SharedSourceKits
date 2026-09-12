@@ -14,7 +14,7 @@ The main components are:
 | [KFD](MGExploitation/Sources/kfd/) | Contains the kernel read/write exploit implementations, retry profiles and page-grab diagnostics. |
 | [Patchfinding](MGExploitation/Sources/patchfind.c) | Uses XPF to locate kernel symbols and offsets in the kernel image. |
 | [dmaFail](MGExploitation/Sources/dmaFail/) | Implements the PPL physical read/write setup used by the chain. |
-| [libjailbreak](MGExploitation/Sources/libjailbreak/) | Provides address translation, kernel and physical memory access, allocation, process and vnode helpers. |
+| [KernelSupport](MGExploitation/Sources/KernelSupport/) | Provides address translation, kernel and physical memory access, allocation, process and vnode helpers. |
 | [Privilege management](MGExploitation/Sources/escalate.c) | Contains root, platform and Mach port operations. |
 | [Public interface](MGExploitation/Sources/Public/) | Exposes the chain result and the headers used by a host application. |
 
@@ -69,10 +69,10 @@ There is no device test harness or compatibility test matrix in this repository.
 
 ## Build check
 
-The current source was compiled into an ARM64 Debug archive with Xcode 26.6 and the iOS 26.5 SDK on September 13, 2026. Compilation completed with warnings, including unused declarations and integer narrowing conversions. This check did not link a host app or execute the library on an iOS device. Release was not rebuilt in that check.
+The current source was compiled into ARM64 Debug and Release archives with Xcode 26.6 and the iOS 26.5 SDK on September 13, 2026. Compilation completed with warnings, including unused declarations and integer narrowing conversions. This check did not link a host app or execute the library on an iOS device.
 
 ## Included code
 
-MGExploitation combines integration code with existing components, including KFD and Dopamine-derived helpers. Original copyright notices remain in the source. `ThirdParty` contains XPF sources, Choma and libgrabkernel2 headers and static archives, and libarchive headers. The bundled archives do not include the full source trees used to build them.
+MGExploitation combines integration code with existing components, including KFD and Dopamine-derived helpers. The `KernelSupport` directory was previously named `libjailbreak`; its existing function names are retained. Original copyright notices remain in the source. `ThirdParty` contains XPF sources, Choma and libgrabkernel2 headers and static archives, and libarchive headers. The bundled archives do not include the full source trees used to build them.
 
 The notes under [MGExploitation/docs](MGExploitation/docs/) include earlier design plans and debugging records. Some describe proposed interfaces; the current public headers and implementation are the reference for what is available now.
