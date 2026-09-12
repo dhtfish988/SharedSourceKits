@@ -24,6 +24,8 @@ The implementation is written in C, Objective-C and Objective-C++. The Xcode pro
 
 Use macOS with Xcode and the iOS SDK installed. The project targets physical iOS devices and uses C17 and C++20. Its deployment target is iOS 15.0.
 
+To browse the source in Xcode, open `MGExploitation/MGExploitation.xcodeproj`. If Xcode reports that it is "already open in another workspace", close the host project or workspace window that already contains MGExploitation, then open it again. You can also edit the library directly inside that host workspace. The message does not mean the project file is damaged.
+
 From the repository root:
 
 ```sh
