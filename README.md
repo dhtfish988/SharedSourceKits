@@ -12,10 +12,10 @@ The main components are:
 | --- | --- |
 | [MGExploitChain](MGExploitation/Sources/MGExploitChain.mm) | Coordinates kernel cache lookup, exploit selection, memory primitive setup and privilege changes. |
 | [KFD](MGExploitation/Sources/kfd/) | Contains the kernel read/write exploit implementations, retry profiles and page-grab diagnostics. |
-| [Patchfinding](MGExploitation/Sources/patchfind.c) | Uses XPF to locate kernel symbols and offsets in the kernel image. |
+| [Patchfinding](MGExploitation/Sources/kernel_patchfinder.c) | Uses XPF to locate kernel symbols and offsets in the kernel image. |
 | [dmaFail](MGExploitation/Sources/dmaFail/) | Implements the PPL physical read/write setup used by the chain. |
 | [KernelSupport](MGExploitation/Sources/KernelSupport/) | Provides address translation, kernel and physical memory access, allocation, process and vnode helpers. |
-| [Privilege management](MGExploitation/Sources/escalate.c) | Contains root, platform and Mach port operations. |
+| [Privilege management](MGExploitation/Sources/privilege_operations.c) | Contains root, platform and Mach port operations. |
 | [Public interface](MGExploitation/Sources/Public/) | Exposes the chain result and the headers used by a host application. |
 
 The implementation is written in C, Objective-C and Objective-C++. The Xcode project builds `libMGExploitation.a`; this repository does not include a standalone app.
@@ -57,7 +57,7 @@ The main header is [MGExploitationKit.h](MGExploitation/Sources/Public/MGExploit
 
 [MGXKernelPrimitives.h](MGExploitation/Sources/Public/MGXKernelPrimitives.h) exposes the lower-level memory and process interfaces. It includes other headers by relative path, so preserve the `Sources` directory layout when using it. The code maintains process-wide state and has no concurrency contract for running multiple chains at once.
 
-The lower-level headers use `kernel_support_*` for primitive initialization, `system_info_*` for system metadata operations, and `runtime_info(...)` for runtime configuration. Consumers must rebuild against the current headers and library together. XPC runtime keys are `runtimeInfo.usesPACBypass` and `runtimeInfo.rootPath`; producers and consumers must use the same schema. `RuntimeRootPath` and `NSRuntimeRootPath` resolve paths relative to the configured root. The optional `exec_cmd_trusted` macro requires a host-provided `kernel_support_trust_binary` declaration and implementation; this library does not provide that service.
+The lower-level headers use `kernel_support_*` for primitive initialization, `system_info_*` for system metadata operations, and `runtime_info(...)` for runtime configuration. Consumers must rebuild against the current headers and library together. Direct includes must use the current filenames, including `KernelSupport/system_info.h`, `KernelSupport/kernel_primitives_types.h`, `KernelSupport/cpu_family_compat.h`, `KernelSupport/primitives_iosurface.h`, `privilege_operations.h` and `kernel_patchfinder.h`. XPC runtime keys are `runtimeInfo.usesPACBypass` and `runtimeInfo.rootPath`; producers and consumers must use the same schema. `RuntimeRootPath` and `NSRuntimeRootPath` resolve paths relative to the configured root. The optional `exec_cmd_trusted` macro requires a host-provided `kernel_support_trust_binary` declaration and implementation; this library does not provide that service.
 
 ## Compatibility and current limits
 
