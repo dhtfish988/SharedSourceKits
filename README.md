@@ -75,6 +75,6 @@ The current source was compiled into ARM64 Debug and Release archives with Xcode
 
 ## Included code
 
-MGExploitation combines integration code with existing components, including KFD and Dopamine-derived helpers. Original copyright notices remain in the source. `ThirdParty` contains XPF sources, Choma and libgrabkernel2 headers and static archives, and libarchive headers. The bundled archives do not include the full source trees used to build them.
+MGExploitation combines integration code with existing components, including KFD and third-party kernel support helpers. Original copyright notices remain in the source. `ThirdParty` contains XPF sources, Choma and libgrabkernel2 headers and static archives, and libarchive headers. The bundled archives do not include the full source trees used to build them.
 
 The notes under [MGExploitation/docs](MGExploitation/docs/) include earlier design plans and debugging records. Some describe proposed interfaces; the current public headers and implementation are the reference for what is available now.
