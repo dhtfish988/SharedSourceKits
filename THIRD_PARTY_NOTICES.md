@@ -5,8 +5,11 @@ research components. Those components were written by other people, keep their
 original copyright holders, and are redistributed here under their own licenses.
 This file lists what is bundled, where it came from and which license applies.
 
-The repository's own integration and build code is covered by [LICENSE](LICENSE).
-Nothing in this file is claimed as original work of this repository.
+The repository's own integration and build code is covered by [LICENSE](LICENSE)
+(MIT). That license covers only that integration and build code — it does not cover
+the bundled upstream components listed below, which keep their own copyright holders
+and license terms. Nothing in this file is claimed as original work of this
+repository.
 
 ## Bundled components
 
