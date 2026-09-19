@@ -71,7 +71,15 @@ There is no device test harness or compatibility test matrix in this repository.
 
 ## Build check
 
-The current source was compiled into ARM64 Debug and Release archives with Xcode 26.6 and the iOS 26.5 SDK on September 13, 2026. Compilation completed with warnings, including unused declarations and integer narrowing conversions. This check did not link a host app or execute the library on an iOS device.
+The current source was compiled into an ARM64 Debug archive with Xcode 27.0 and the iPhoneOS 27.0 SDK on September 20, 2026, from a clean tree at commit `519c340`:
+
+```console
+$ xcodebuild -scheme MGExploitation -configuration Debug -sdk iphoneos CODE_SIGNING_ALLOWED=NO build
+...
+** BUILD SUCCEEDED **
+```
+
+The build produced `libMGExploitation.a` and completed with 66 warnings, including unused variables and unused functions. This check did not link a host app or execute the library on an iOS device. An earlier check on September 13, 2026 covered Debug and Release archives with the iOS 26.5 SDK.
 
 ## Included code
 
